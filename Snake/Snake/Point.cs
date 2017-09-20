@@ -19,13 +19,20 @@ namespace Snake
             this.symbol = symbol;
         }
 
+        public Point(Point point)
+        {
+            this.x = point.x;
+            this.y = point.y;
+            this.symbol = point.symbol;
+        }
+
         public void Draw()
         {
             Console.SetCursorPosition(x, y);
             Console.Write(symbol);
         }
 
-        protected void Shift(int offset, Direction direction)
+        public void Shift(int offset, Direction direction)
         {
             switch (direction)
             {
@@ -48,6 +55,15 @@ namespace Snake
         {
             this.symbol = ' ';
             this.Draw();
+        }
+
+        public bool IsHit(Point point)
+        {
+            if (this.x == point.x && this.y == point.y)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

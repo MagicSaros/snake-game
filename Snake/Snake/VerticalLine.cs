@@ -13,7 +13,7 @@ namespace Snake
             listPoints = new List<Point>();
             for (int y = yStart; y <= yStart + length; y++)
             {
-                Point point = new Point(xStart, y, '*');
+                Point point = new Point(xStart, y, symbol);
                 listPoints.Add(point);
             }
         }

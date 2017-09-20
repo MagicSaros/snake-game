@@ -10,28 +10,54 @@ namespace Snake
     {
         private Direction direction;
 
+        public Snake(Point tail, int length, Direction direction)
+        {
+            this.direction = direction;
+            listPoints = new List<Point>();
+            for (int i = 0; i < length; i++)
+            {
+                Point point = new Point(tail);
+                point.Shift(i, direction);
+                listPoints.Add(point);
+            }
+        }
+
         public void HandleKey(ConsoleKey key)
         {
             switch (key)
             {
                 case ConsoleKey.UpArrow:
-                    Move(Direction.UP);
+                    direction = Direction.UP;
                     break;
                 case ConsoleKey.DownArrow:
-                    Move(Direction.DOWN);
+                    direction = Direction.DOWN;
                     break;
                 case ConsoleKey.LeftArrow:
-                    Move(Direction.LEFT);
+                    direction = Direction.LEFT;
                     break;
                 case ConsoleKey.RightArrow:
-                    Move(Direction.RIGHT);
+                    direction = Direction.RIGHT;
                     break;
             }
         }
 
-        private void Move(Direction direction)
+        public void Move()
         {
+            Point tail = listPoints.First();
+            listPoints.Remove(tail);
+            tail.Clear();
 
+            Point head = GetNextPosition();
+            listPoints.Add(head);
+            head.Draw();
+        }
+
+        private Point GetNextPosition()
+        {
+            Point head = listPoints.Last();
+            Point newHead = new Point(head);
+            newHead.Shift(1, direction);
+            return newHead;
         }
     }
 }
