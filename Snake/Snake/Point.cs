@@ -8,9 +8,9 @@ namespace Snake
 {
     class Point
     {
-        private int x;
-        private int y;
-        private char symbol;
+        protected int x;
+        protected int y;
+        public char symbol;
 
         public Point(int x, int y, char symbol)
         {

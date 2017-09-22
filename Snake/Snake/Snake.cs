@@ -55,9 +55,34 @@ namespace Snake
         private Point GetNextPosition()
         {
             Point head = listPoints.Last();
-            Point newHead = new Point(head);
-            newHead.Shift(1, direction);
-            return newHead;
+            Point nextPoint = new Point(head);
+            nextPoint.Shift(1, direction);
+            return nextPoint;
+        }
+
+        public bool Eat(Point food)
+        {
+            Point nextPoint = GetNextPosition();
+            if (nextPoint.IsHit(food))
+            {
+                food.symbol = nextPoint.symbol;
+                listPoints.Add(food);
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsHitTail()
+        {
+            Point head = listPoints.Last();
+            for (int i = 0; i < listPoints.Count - 2; i++)
+            {
+                if (head.IsHit(listPoints[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

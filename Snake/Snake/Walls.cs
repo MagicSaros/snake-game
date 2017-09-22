@@ -28,5 +28,19 @@ namespace Snake
             }
         }
 
+        public bool IsHit(Figure figure)
+        {
+            foreach (Figure wall in listWalls)
+            {
+                if (wall.IsHit(figure))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
     }
 }
